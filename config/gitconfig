@@ -1,0 +1,13 @@
+[user]
+	name = wangsiyu
+	email = 450887035@qq.com
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[http]
+	proxy = socks5://127.0.0.1:1080
+[https]
+	proxy = socks5://127.0.0.1:1080
+[credential]
+	helper = store

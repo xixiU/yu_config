@@ -1,0 +1,226 @@
+set nocompatible " be iMproved, required
+filetype off " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+" Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-scripts/LargeFile'
+
+" syntax checker
+Plugin 'vim-syntastic/syntastic'
+" dense-analysis/ale
+
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-unimpaired' " tab setting has bug. Manually fix it!
+Plugin 'Valloric/YouCompleteMe' " <F2> <F9> <F12>
+Plugin 'tpope/vim-surround'
+
+" Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" popular theme
+" Plugin 'connorholyday/vim-snazzy'
+Plugin 'morhetz/gruvbox'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+
+" file structure
+Plugin 'majutsushi/tagbar'
+
+" Plugin 'vim-airline/vim-airline'
+
+" Bookmarks
+" Plug 'kshenoy/vim-signature'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+" Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end() " required
+filetype plugin indent on " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList - lists configured plugins
+" :PluginInstall - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+" Unimpaired Vim Settings
+" [b :bprevious
+" ]b :bnext
+" [B :bfirst
+" ]B :blast
+"
+" [<Space> Add [count] blank lines above the cursor.
+" ]<Space> Add [count] blank lines below the cursor.
+" [e Exchange the current line with [count] lines above it.
+" ]e Exchange the current line with [count] lines below it.
+"
+" OPTION TOGGLING *unimpaired-toggling*
+" On Off Toggle Option
+" [oh ]oh yoh 'hlsearch'
+" [ow ]ow yow 'wrap'
+" [or ]or yor 'relativenumber'
+" [ov ]ov yov 'virtualedit'
+" [oi ]oi yoi 'ignorecase'
+" [ol ]ol yol 'list' " show invisible charactor
+"
+" [ob ]ob yob 'background' (dark is off, light is on)
+" [oc ]oc yoc 'cursorline'
+" [od ]od yod 'diff' (actually |:diffthis| / |:diffoff|)
+" [on ]on yon 'number'
+" [os ]os yos 'spell'
+" [ou ]ou you 'cursorcolumn'
+" [ox ]ox yox 'cursorline' 'cursorcolumn' (x as in crosshairs)
+"
+" Enter Paste Mode: [op ]op yop
+
+
+" Basic Fold Cmd
+" za
+" zc zC close
+" zo zO open
+" zR zM reduce fold, fold more
+
+" Windows ops.
+" vim -o file1 file2
+" vim -O file1 file2
+"
+" C-w x
+" C-w =
+" C-w |
+"
+" Ctrl-O Ctrl-I:   Back & Forward
+
+
+" color snazzy
+let mapleader=" "
+set encoding =utf-8
+let &t_ut=''
+autocmd vimenter * colorscheme gruvbox
+set background=dark    " Setting dark mode
+set nu
+set hidden 
+set splitright
+set relativenumber
+set clipboard+=unnamed
+set cursorline
+set mouse=a
+set history=200
+set wildmenu
+" set wildmode=full
+set hls
+set ignorecase " ignore case when searching
+set smartcase " enable vim smart case when searching
+set scrolloff=5
+
+" set spell " can show syntax errors of words
+" Auto correction: 1. Move to wrong word; 2. Hit Z=
+
+" map <up> :res +5<CR>
+" map <down> :res -5<CR>
+map <left> :vertical resize-5<CR>
+map <right> :vertical resize+5<CR>
+
+" go to the last location when open a file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" set term=ansi
+" set foldlevelstart=99 " don't fold at beginning
+nnoremap  <LEADER>a zA
+nnoremap <Leader>b :ls<CR>:b<Space>
+let g:LargeFile=10
+" let g:tagbar_ctags_bin='/home/ubuntu/software/ctags-5.8'
+map <F10> :NERDTreeToggle<CR>
+nmap S :w<CR>
+nmap Q :q<CR>
+map <LEADER>l <C-w>l
+map <LEADER>k <C-w>k
+map <LEADER>h <C-w>h
+map <LEADER>j <C-w>j
+nmap K <C-u>
+nmap J <C-d>
+nmap R :source $HOME/.vimrc<CR>
+
+" ycm no preview
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt=0
+
+"------------------------------------------------------
+" UltiSnips Settings
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-f>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/vim/Ultisnips', 'UltiSnips']
+" let g:UltiSnipsSnippetDirectories=[$HOME.'./config/vim/Ultisnips/']
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"------------------------------------------------------
+
+nmap <F8> :TagbarToggle<CR>
+
+" CtrlP
+" let g:ctrlp_cmd='CtrlPMRU'
+
+" tab toggle
+nnoremap [t :tabp<CR>
+nnoremap ]t :tabn<CR>
+nnoremap [T :tabfirst<CR>
+nnoremap ]T :tablast<CR>
+
+
+" Python settings
+au BufNewFile,BufRead *.py set foldmethod=indent
+au BufNewFile,BufRead *.py set foldignore=
+au BufNewFile,BufRead *.py set tabstop=4
+au BufNewFile,BufRead *.py set softtabstop=4
+au BufNewFile,BufRead *.py set shiftwidth=4
+au BufNewFile,BufRead *.py set textwidth=79
+au BufNewFile,BufRead *.py set autoindent
+au BufNewFile,BufRead *.py set expandtab
+au BufNewFile,BufRead *.py set fileformat=unix
+" au BufNewFile,BufRead *.py map <F5> <Esc>!python %<CR>
+" ycm
+" let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_autoclose_preview_window_after_insertion=1
+au BufNewFile,BufRead *.py map <F12> <Esc>:YcmCompleter GoTo<CR>
+au BufNewFile,BufRead *.py map <F9> <Esc>:YcmCompleter GoToReferences<CR>
+au BufNewFile,BufRead *.py map <F2> <Esc>:YcmCompleter GetDoc<CR>
+" syntax on 
+
