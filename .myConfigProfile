@@ -1,0 +1,43 @@
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+
+export MAVEN_HOME=/Users/yuanrongjie/software/coding/apache-maven-3.6.3
+export PATH=$PATH:$MAVEN_HOME/bin
+
+# add python path
+export PATH=$PATH:/Users/yuanrongjie/Library/Python/3.9/bin
+
+# add mysql path
+export PATH=$PATH:/usr/local/mysql/bin
+
+# add go
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# from github add openai token
+export GITHUB_TOKEN="xx"
+export OPENAI_API_KEY="$GITHUB_TOKEN"
+
+
+# add proxy
+#export ALL_PROXY="socks5://127.0.0.1:7890"
+export DEEP_SEEK_KEY="sk-xx"
+
+
+alias proxy="
+    export http_proxy=socks5://127.0.0.1:7890;
+    export https_proxy=socks5://127.0.0.1:7890;
+    export all_proxy=socks5://127.0.0.1:7890;
+    export no_proxy=socks5://127.0.0.1:7890;
+    export HTTP_PROXY=socks5://127.0.0.1:7890;
+    export HTTPS_PROXY=socks5://127.0.0.1:7890;
+    export ALL_PROXY=socks5://127.0.0.1:7890;
+    export NO_PROXY=socks5://127.0.0.1:7890;"
+alias unproxy="
+    unset http_proxy;
+    unset https_proxy;
+    unset all_proxy;
+    unset no_proxy;
+    unset HTTP_PROXY;
+    unset HTTPS_PROXY;
+    unset ALL_PROXY;
+    unset NO_PROXY"
