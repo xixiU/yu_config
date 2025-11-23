@@ -43,4 +43,7 @@ alias unproxy="
     unset NO_PROXY"
 # zsh不设置histrory
 setopt no_share_history
+@ add uv mirror
+export UV_DEFAULT_INDEX="https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+
 
