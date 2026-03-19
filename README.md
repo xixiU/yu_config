@@ -8,3 +8,9 @@ https://mirrors.tuna.tsinghua.edu.cn/
 ./install_config.sh
 
 ./install_ycm.sh
+
+# claude
+claude config directory
+
+# clash_verge
+clash verge 
