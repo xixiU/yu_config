@@ -1,0 +1,49 @@
+{
+  "default_env": "dev",
+  "environments": {
+    "dev": {
+      "ssh_user": "root",
+      "ssh_host": "172.31.160.184",
+      "ssh_port": 22,
+      "ssh_key": "~/.ssh/id_rsa",
+      "java_home": "/usr/java/jdk1.8.0_361"
+    }
+  },
+  "apps": {
+    "ts-service": {
+      "env": "dev",
+      "port": 9191,
+      "remote_path": "/iflytek/server/zhft-4.0-mysql/ts-service-inner/ts-service-5.0/ts-service-5.0",
+      "local_path": ".",
+      "jar_pattern": "ts-service*.jar"
+    },
+    "aicourt-monitor-service": {
+      "env": "dev",
+      "port": 7901,
+      "remote_path": "/iflytek/server/zhft-4.0-mysql/aicourt-monitor-service-1.0",
+      "local_path": ".",
+      "jar_pattern": "aicourt-monitor-service*.jar"
+    },
+    "aicourt-video-service": {
+      "env": "dev",
+      "port": 7902,
+      "remote_path": "/iflytek/server/zhft-4.0-mysql/aicourt-video-service-1.0",
+      "local_path": ".",
+      "jar_pattern": "aicourt-monitor-service*.jar"
+    },
+    "aicourt-assistant-service": {
+      "env": "dev",
+      "port": 7100,
+      "remote_path": "/iflytek/server/zhft-4.0-mysql/aicourt-assistant-service",
+      "local_path": ".",
+      "jar_pattern": "aicourt-monitor-service*.jar"
+    },
+    "iflytek-admin": {
+      "env": "dev",
+      "port": 7001,
+      "remote_path": "/iflytek/server/zhft-4.0-mysql/aicourt-soundcard-auth-service/iflytek-admin",
+      "local_path": ".",
+      "jar_pattern": "iflytek-admin*.jar"
+    }
+  }
+}

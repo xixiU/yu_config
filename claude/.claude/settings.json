@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(*)",
+      "WebSearch(*)",
+      "Read(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "Bash(pwd)",
+      "Bash(ls *)",
+      "Bash(echo *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(du *)",
+      "Bash(git *)",
+      "Bash(which *)",
+      "Bash(env | grep *)",
+      "Bash(python --version)",
+      "Bash(uv --version)",
+      "Bash(uv pip list)",
+      "Bash(uv pip show *)",
+      "Bash(npm list *)",
+      "Bash(pytest --collect-only)",
+      "Bash(ruff check --no-fix *)",
+      "Bash(type *)",
+      "Bash(* --version)",
+      "Bash(* --help *)",
+      "Bash(* --help *)",
+      "Bash(source .venv/bin/activate)",
+      "Bash(python -c *)",
+      "MCP(*)"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxx",
+    "ANTHROPIC_BASE_URL": "xxx"
+  },
+  "includeCoAuthoredBy": false
+}
