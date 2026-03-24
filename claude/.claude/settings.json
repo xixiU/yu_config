@@ -16,6 +16,7 @@
       "Bash(tail *)",
       "Bash(curl *)",
       "Bash(wget *)",
+      "Bash(xargs *)",
       "Bash(du *)",
       "Bash(git *)",
       "Bash(which *)",
