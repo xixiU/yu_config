@@ -85,6 +85,7 @@ function main(config) {
 
 
     // === 第一优先级：广告拦截 (规则集) ===
+    "RULE-SET,adrules_domain,🚫 广告拦截",
     "RULE-SET,reject,🚫 广告拦截",
     "RULE-SET,advertising,🚫 广告拦截",
     
