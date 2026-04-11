@@ -34,7 +34,7 @@
       "Bash(* --help *)",
       "Bash(source .venv/bin/activate)",
       "Bash(python -c *)",
-      "MCP(*)"
+      "mcp_*"
     ]
   },
   "env": {
