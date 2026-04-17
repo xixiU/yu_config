@@ -1,4 +1,14 @@
 {
+  "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": 1,
+  "MAX_CONSECUTIVE_AUTOCOMPACT_FAILURES": 3,
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "sk-1d6aca075b724a118ab6e3a6321c65be9bc3b33a7880492a",
+    "ANTHROPIC_BASE_URL": "https://one.iflytek.com/api/llm/console/chat",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "1"
+  },
+  "includeCoAuthoredBy": false,
+  "model": "opus[1m]",
   "permissions": {
     "allow": [
       "WebFetch(*)",
@@ -6,9 +16,11 @@
       "Read(*)",
       "Glob(*)",
       "Grep(*)",
-      "Bash(cd)",
       "Bash(pwd)",
       "Bash(ls *)",
+      "Bash(wc *)",
+      "Bash(cd)",
+      "Bash(type *)",
       "Bash(echo *)",
       "Bash(find *)",
       "Bash(grep *)",
@@ -29,19 +41,22 @@
       "Bash(npm list *)",
       "Bash(pytest --collect-only)",
       "Bash(ruff check --no-fix *)",
-      "Bash(type *)",
       "Bash(* --version)",
       "Bash(* --help *)",
       "Bash(* --help *)",
       "Bash(source .venv/bin/activate)",
       "Bash(python -c *)",
-      "mcp_*"
+      "Mcp_*",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Bash(sshpass *)",
+      "Bash(mvn *)",
+      "Bash(ss -tlnp*)",
+      "Bash(sleep *)"
+    ],
+    "deny": [
+      "Read(./secrets/**)",
+      "Bash(rm -rf *)"
     ]
-  },
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "ANTHROPIC_AUTH_TOKEN": "sk-xxx",
-    "ANTHROPIC_BASE_URL": "xxx"
-  },
-  "includeCoAuthoredBy": false
+  }
 }
