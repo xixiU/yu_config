@@ -9,6 +9,7 @@
   },
   "includeCoAuthoredBy": false,
   "model": "opus[1m]",
+  "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-7",
   "permissions": {
     "allow": [
       "WebFetch(*)",
@@ -18,6 +19,7 @@
       "Grep(*)",
       "Bash(pwd)",
       "Bash(ls *)",
+      "Bash(cp *)",
       "Bash(wc *)",
       "Bash(cd)",
       "Bash(type *)",
@@ -35,6 +37,8 @@
       "Bash(du *)",
       "Bash(git *)",
       "Bash(which *)",
+      "Bash(mkdir *)",
+      "Bash(touch *)",
       "Bash(env | grep *)",
       "Bash(python --version)",
       "Bash(uv --version)",
@@ -44,7 +48,6 @@
       "Bash(pytest --collect-only)",
       "Bash(ruff check --no-fix *)",
       "Bash(* --version)",
-      "Bash(* --help *)",
       "Bash(* --help *)",
       "Bash(source .venv/bin/activate)",
       "Bash(python -c *)",
