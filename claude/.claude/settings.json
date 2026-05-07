@@ -51,7 +51,7 @@
       "Bash(* --help *)",
       "Bash(source .venv/bin/activate)",
       "Bash(python -c *)",
-      "Mcp_*",
+      "mcp_*",
       "Bash(ssh *)",
       "Bash(scp *)",
       "Bash(sshpass *)",
