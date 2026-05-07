@@ -21,7 +21,7 @@
       "Bash(ls *)",
       "Bash(cp *)",
       "Bash(wc *)",
-      "Bash(cd)",
+      "Bash(cd *)",
       "Bash(type *)",
       "Bash(echo *)",
       "Bash(find *)",
