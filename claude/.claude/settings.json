@@ -14,6 +14,8 @@
     "allow": [
       "WebFetch(*)",
       "WebSearch(*)",
+      "Edit(*)",
+      "Write(*)",
       "Read(*)",
       "Glob(*)",
       "Grep(*)",
@@ -57,6 +59,7 @@
       "Bash(sshpass *)",
       "Bash(mvn *)",
       "Bash(ss -tlnp*)",
+      "mcp__Chrome-devtools__*",
       "Bash(sleep *)"
     ]
   }
