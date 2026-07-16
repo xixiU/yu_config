@@ -12,3 +12,10 @@
 ## git相关
 当前工程是WSL与windows、linux混合开发环境，在查看代码差异的时候使用
 git diff --ignore-cr-at-eol 或 git diff -w
+
+
+## 目录结构
+相关文档统一写在docs目录下，并按照二级目录归类，
+docs/design 设计相关
+docs/implementation 实施细节
+docs/plan   计划
