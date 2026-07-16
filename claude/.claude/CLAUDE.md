@@ -15,7 +15,7 @@ git diff --ignore-cr-at-eol 或 git diff -w
 
 
 ## 目录结构
-相关文档统一写在docs目录下，并按照二级目录归类，
+相关文档统一写在docs目录下，并按照二级目录归类，如下是常见的类别，可在此基础上扩充
 docs/design 设计相关
 docs/implementation 实施细节
 docs/plan   计划
