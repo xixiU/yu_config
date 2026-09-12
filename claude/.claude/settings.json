@@ -62,5 +62,6 @@
       "mcp__Chrome-devtools__*",
       "Bash(sleep *)"
     ]
-  }
+  },
+  "skipDangerousModePermissionPrompt": true
 }
