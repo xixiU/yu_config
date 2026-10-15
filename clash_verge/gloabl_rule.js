@@ -45,7 +45,23 @@ function main(config) {
       "url": "https://fastly.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Providers/BanAD.yaml",
       "path": "./ruleset/advertising.yaml",
       "interval": 86400
-    }
+    },
+    // 中国大陆域名规则集
+    "china_domain": {
+    "type": "http",
+    "behavior": "domain",
+    "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt",
+    "path": "./ruleset/china_domain.yaml",
+    "interval": 86400
+   },
+   //中国大陆 IP 规则集
+    "china_ip": {
+    "type": "http",
+    "behavior": "ipcidr",
+    "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt",
+    "path": "./ruleset/china_ip.yaml",
+    "interval": 86400
+   }
   };
   config['rule-providers'] = { ...config['rule-providers'], ...providers };
   // --- 1. 定义筛选规则 (正则表达式) ---
@@ -118,7 +134,8 @@ function main(config) {
     // === 第一优先级：广告拦截 (规则集) ===
     "RULE-SET,reject,🚫 广告拦截",
     "RULE-SET,advertising,🚫 广告拦截",
-    
+    "RULE-SET,adrules_domain,🚫 广告拦截", 
+
     // 针对腾讯/微信/字节广告的补充规则 (解决国内 App 开屏广告)
     "DOMAIN-KEYWORD,adservice,🚫 广告拦截",
     "DOMAIN-SUFFIX,gdt.qq.com,🚫 广告拦截", // 腾讯广点通
@@ -139,7 +156,6 @@ function main(config) {
     // 微信内部广告域名
     "DOMAIN-SUFFIX,ad.wechat.com,REJECT",
     "DOMAIN-KEYWORD,trace.qq.com,REJECT",
-
 
     // 酷壳
     "DOMAIN-SUFFIX,coolshell.cn,🐙 GitHub",
@@ -244,6 +260,11 @@ function main(config) {
     "DOMAIN-SUFFIX,google.com,🤖 AI 模型",
     "DOMAIN-SUFFIX,onenote.cloud.microsoft,🤖 AI 模型",
     "DOMAIN-SUFFIX,onedrive.live.com,🤖 AI 模型",
+
+    //  7. 中国大陆直连（放在最后，优先级低于上面所有特殊规则）
+    "RULE-SET,china_domain,DIRECT",
+    "RULE-SET,china_ip,DIRECT",
+    "GEOIP,CN,DIRECT",  // IP 地址属于中国的直连
 
   ];
 
