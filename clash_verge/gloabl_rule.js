@@ -3,7 +3,24 @@
 
 function main(config) {
   
-  
+  // 1. 定义你要新增的代理（socks5 / http / trojan / ss 都支持）
+  const myNewProxy = {
+    name: "local-SOCKS5",    // 显示名
+    type: "socks5",             // 类型：socks5 / http / shadowsocks 等
+    server: "47.115.146.24",        // Ecs服务器地址
+    port: 6000,                 // 端口（你 ssh -D 的端口）
+    // 可选：用户名密码
+    // username: "user",
+    // password: "pass",
+    // 可选：tls
+    // tls: true,
+    // skip-cert-verify: true
+  };
+
+  // 2. 把新代理追加到 config.proxies
+  if (!config.proxies) config.proxies = [];
+  config.proxies.push(myNewProxy);
+
   // 防止配置为空的保护措施
   if (!config['proxy-groups']) config['proxy-groups'] = [];
   if (!config['rules']) config['rules'] = [];
@@ -35,10 +52,10 @@ function main(config) {
   
   // AI 组：匹配 美国(US) 或 日本(JP) 相关的节点
   // (?i) 表示不区分大小写
-  const aiFilter = "(?i)(美国|US|United States|America|日本|JP|Japan|Tokyo|Osaka)";
+  const aiFilter = "(?i)(美国|US|United States|America|日本|JP|Japan|Tokyo|Osaka|feifei|yan)";
   
   // GitHub 组：匹配 香港(HK) 或 新加坡(SG) 相关的节点
-  const githubFilter = "(?i)(香港|HK|Hong Kong|新加坡|SG|Singapore|Lion City)";
+  const githubFilter = "(?i)(香港|HK|Hong Kong|新加坡|SG|Singapore|Lion City|feifei|yan)";
 
   // --- 2. 定义新的策略组 ---
   
@@ -68,12 +85,25 @@ function main(config) {
       "include-all-providers": true,
       "include-all": true,
       "filter": aiFilter
-    }
+    },
+     {
+    "name": "🎬 国外媒体",
+    "type": "select",
+    "proxies": [], // 可以手动添加 "🚀 节点选择" 等其他组
+    "include-all-providers": true,
+    "include-all": true
+    // 不设置 filter，让你可以自由选择任意节点
+  }
   ];
 
   // --- 3. 定义分流规则 ---
 
   const newRules = [
+    // 'PROCESS-SUFFIX,example.com,local-SOCKS5',
+
+    'PROCESS-NAME,Cursor.exe,DIRECT',
+    'PROCESS-NAME,Cursor,DIRECT',
+
      // 讯飞直连
     "DOMAIN-SUFFIX,iflytek.com,DIRECT",
     "DOMAIN-SUFFIX,iflytek.cn,DIRECT",
@@ -82,10 +112,10 @@ function main(config) {
     "DOMAIN-SUFFIX,in.iflyaicloud.com,DIRECT",
     "DOMAIN-KEYWORD,ifly,DIRECT",
     "DOMAIN-KEYWORD,iflytek,DIRECT",
+    "DOMAIN-SUFFIX,iflysec.com,DIRECT",
 
 
     // === 第一优先级：广告拦截 (规则集) ===
-    "RULE-SET,adrules_domain,🚫 广告拦截",
     "RULE-SET,reject,🚫 广告拦截",
     "RULE-SET,advertising,🚫 广告拦截",
     
@@ -114,6 +144,63 @@ function main(config) {
     // 酷壳
     "DOMAIN-SUFFIX,coolshell.cn,🐙 GitHub",
 
+    // === 国外媒体规则 (走 国外媒体 组) ===
+    // YouTube
+    "DOMAIN-SUFFIX,youtube.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,googlevideo.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,ytimg.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,youtu.be,🎬 国外媒体",
+    "DOMAIN-KEYWORD,youtube,🎬 国外媒体",
+
+    // Twitter / X
+    "DOMAIN-SUFFIX,twitter.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,x.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,twimg.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,t.co,🎬 国外媒体",
+    "DOMAIN-KEYWORD,twitter,🎬 国外媒体",
+
+    // Facebook & Instagram
+    "DOMAIN-SUFFIX,facebook.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,fb.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,fbcdn.net,🎬 国外媒体",
+    "DOMAIN-SUFFIX,instagram.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,cdninstagram.com,🎬 国外媒体",
+
+    // Netflix
+    "DOMAIN-SUFFIX,netflix.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,nflxvideo.net,🎬 国外媒体",
+    "DOMAIN-SUFFIX,nflximg.net,🎬 国外媒体",
+    "DOMAIN-SUFFIX,nflxso.net,🎬 国外媒体",
+    "DOMAIN-SUFFIX,nflxext.com,🎬 国外媒体",
+
+    // Twitch
+    "DOMAIN-SUFFIX,twitch.tv,🎬 国外媒体",
+    "DOMAIN-SUFFIX,twitchcdn.net,🎬 国外媒体",
+    "DOMAIN-SUFFIX,ttvnw.net,🎬 国外媒体",
+
+    // TikTok (国际版)
+    "DOMAIN-SUFFIX,tiktok.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,tiktokcdn.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,musical.ly,🎬 国外媒体",
+
+    // Reddit
+    "DOMAIN-SUFFIX,reddit.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,redd.it,🎬 国外媒体",
+    "DOMAIN-SUFFIX,redditmedia.com,🎬 国外媒体",
+
+    // Telegram
+    "DOMAIN-SUFFIX,telegram.org,🎬 国外媒体",
+    "DOMAIN-SUFFIX,t.me,🎬 国外媒体",
+    "DOMAIN-SUFFIX,tdesktop.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,telegra.ph,🎬 国外媒体",
+
+    // Spotify
+    "DOMAIN-SUFFIX,spotify.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,scdn.co,🎬 国外媒体",
+
+    // Vimeo
+    "DOMAIN-SUFFIX,vimeo.com,🎬 国外媒体",
+    "DOMAIN-SUFFIX,vimeocdn.com,🎬 国外媒体",
 
     // === GitHub 规则 (走 GitHub 组) ===
     
@@ -154,6 +241,7 @@ function main(config) {
     // Copilot (微软 AI)
     "DOMAIN-SUFFIX,copilot.microsoft.com,🤖 AI 模型",
     "DOMAIN-SUFFIX,bing.com,🤖 AI 模型",
+    "DOMAIN-SUFFIX,google.com,🤖 AI 模型",
     "DOMAIN-SUFFIX,onenote.cloud.microsoft,🤖 AI 模型",
     "DOMAIN-SUFFIX,onedrive.live.com,🤖 AI 模型",
 
