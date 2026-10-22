@@ -21,6 +21,27 @@ function main(config) {
   if (!config.proxies) config.proxies = [];
   config.proxies.push(myNewProxy);
 
+  // A. Tailnet 流量绕过代理（系统代理 / TUN 模式都生效）
+  const tailscaleRules = [
+    // 私有网段 / 回环：必须直连，否则内网访问绕代理
+    "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+    "IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+    "IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+    "IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+
+    // 已包含 MagicDNS 的 100.100.100.100
+    "IP-CIDR,100.64.0.0/10,DIRECT,no-resolve",      
+    "IP-CIDR6,fd7a:115c:a1e0::/48,DIRECT,no-resolve",
+    "DOMAIN-SUFFIX,ts.net,DIRECT",
+  ];
+
+  // MagicDNS 主机名不要进 fake-ip，否则上面那条 DOMAIN-SUFFIX 直连到假 IP
+  config.dns = config.dns || {};
+  config.dns['fake-ip-filter'] = Array.from(new Set([
+    ...(config.dns['fake-ip-filter'] || []),
+    "+.ts.net",
+  ]));
+
   // 防止配置为空的保护措施
   if (!config['proxy-groups']) config['proxy-groups'] = [];
   if (!config['rules']) config['rules'] = [];
@@ -142,11 +163,8 @@ function main(config) {
     "DOMAIN-SUFFIX,pglstatp.com,🚫 广告拦截", // 字节跳动广告
     "DOMAIN-SUFFIX,ad.wechat.com,🚫 广告拦截", // 微信广告
     "DOMAIN-KEYWORD,log.umsns.com,🚫 广告拦截", // 微信埋点统计
+    "DOMAIN-KEYWORD,l.qq.com,🚫 广告拦截", //广点通
 
-    // 腾讯广点通 (最核心的广告来源)
-    "DOMAIN-SUFFIX,gdt.qq.com,REJECT",
-    "DOMAIN-SUFFIX,l.qq.com,REJECT",
-    "DOMAIN-SUFFIX,v.gdt.qq.com,REJECT",
 
     // 腾讯统计与行为分析 (拦截后可减少精准推送)
     "DOMAIN-SUFFIX,oth.eve.mdt.qq.com,REJECT",
@@ -225,7 +243,6 @@ function main(config) {
     "DOMAIN-SUFFIX,githubusercontent.com,🐙 GitHub",
     "DOMAIN-SUFFIX,githubassets.com,🐙 GitHub",
     "DOMAIN-SUFFIX,git.io,🐙 GitHub",
-    "DOMAIN-KEYWORD,github,🐙 GitHub",
 
     "DOMAIN-SUFFIX,login.microsoft.com,🐙 GitHub",
     "DOMAIN-SUFFIX,microsoftonline.com,🐙 GitHub",
@@ -253,6 +270,7 @@ function main(config) {
     "DOMAIN-SUFFIX,bard.google.com,🤖 AI 模型",
     "DOMAIN-SUFFIX,aistudio.google.com,🤖 AI 模型",
     "DOMAIN-SUFFIX,generativelanguage.googleapis.com,🤖 AI 模型",
+    "DOMAIN-SUFFIX,gstatic.com,🤖 AI 模型",
     
     // Copilot (微软 AI)
     "DOMAIN-SUFFIX,copilot.microsoft.com,🤖 AI 模型",
@@ -274,7 +292,7 @@ function main(config) {
   config['proxy-groups'].unshift(...newGroups);
 
   // 将新规则插入到列表最前面 (优先级最高)
-  config['rules'].unshift(...newRules);
+  config['rules'].unshift(...tailscaleRules, ...newRules);
 
   return config;
 }
